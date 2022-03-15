@@ -8,7 +8,7 @@ const knex = require("knex")({
     host: "localhost",
     user: "postgres",
     password: "0123",
-    database: "MyInnDB",
+    database: "postgres",
   },
   useNullAsDefault: true,
 });
@@ -62,6 +62,10 @@ app.post("/Servicio", (req, res) => {
 });
 
 //GETS
+app.get("/", (req, res)=>{
+  res.send("API cool!!")
+});
+
 app.get("/servicios", (req, res) => {
   knex
     .select("*")
