@@ -5,10 +5,8 @@ const cors = require("cors")
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host: "localhost",
-    user: "postgres",
-    password: "0123",
-    database: "postgres"
+    connectionString: procces.env.DATABASE_URL,
+    ssl:true
   },
   useNullAsDefault: true
 });
@@ -177,6 +175,4 @@ app.put('/importe',(req,res)=>{
   .then(resp => res.json())
 })
 
-app.listen(port, ()=>{
-  console.log(`the server is listening to port: ${port}`);
-}) 
+app.listen(port) 
