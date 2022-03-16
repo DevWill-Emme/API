@@ -58,7 +58,8 @@ app.get('/', (req,res)=>{
 app.get('/servicios', (req,res)=>{
   knex.select('*').from('Servicio') 
     .then(ser=> res.json(ser))
-}).catch(err => res.send(err));
+    .catch(err => res.send(err))
+});
 
 app.get('/clientes', (req,res)=>{
   knex.select('*').from('clientes') 
