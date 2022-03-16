@@ -53,7 +53,7 @@ app.post('/Servicio',(req,res)=>{
 //GET
 app.get('/', (req,res)=>{
   res.send('API cool!!')
-}) 
+});
 
 app.get('/servicios', (req,res)=>{
   knex.select('*').from('Servicio') 
