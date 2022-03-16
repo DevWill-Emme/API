@@ -53,12 +53,12 @@ app.post('/Servicio',(req,res)=>{
 //GET
 app.get('/', (req,res)=>{
   res.send('API cool!!')
-});
+}).catch(err => res.send(err));
 
 app.get('/servicios', (req,res)=>{
   knex.select('*').from('Servicio') 
     .then(ser=> res.json(ser))
-})
+}).catch(err => res.send(err));
 
 app.get('/clientes', (req,res)=>{
   knex.select('*').from('clientes') 
