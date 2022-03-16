@@ -5,7 +5,7 @@ const cors = require("cors")
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    connectionString: procces.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL,
     ssl:true
   },
   useNullAsDefault: true
@@ -17,7 +17,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-/*//POST
+//POST
 app.post('/Servicio',(req,res)=>{
   const { sexo,nombre,ci,tiempo }=req.body
   
@@ -175,5 +175,5 @@ app.put('/importe',(req,res)=>{
   .update({ImporteTotal: importe})
   .then(resp => res.json())
 })
-*/
+
 app.listen(port) 
