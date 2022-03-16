@@ -45,9 +45,10 @@ app.post('/Servicio',(req,res)=>{
         }
       })
       .then(res.json({Request: true}))
-      .catch(err => res.status(400).json(err))
+      .catch(err => res.send(err))
     })
     .then(trx.commit)
+    .catch(trx.rollback)
   })
 })
 
@@ -65,6 +66,7 @@ app.get('/servicios', (req,res)=>{
 app.get('/clientes', (req,res)=>{
   knex.select('*').from('clientes') 
     .then(clie=> res.json(clie))
+    .catch(err => res.send(err))
 })
 
 //DELETE
@@ -83,7 +85,7 @@ app.delete('/del/servicios',(req,res)=>{
         })
       })
       .then(resp => res.json('done'))
-      .catch(err => res.status(400).json(err))
+      .catch(err => res.send(err))
     })
     .then(trx.commit)
     .catch(trx.rollback)
@@ -98,7 +100,7 @@ app.delete('/del/clientes',(req,res)=>{
     .then(()=>{
       return trx('Servicio').where({CI:key}).del()
       .then(resp => res.json('done'))
-      .catch(err => res.status(400).json(err))
+      .catch(err => res.send(err))
     })
     .then(trx.commit)
     .catch(trx.rollback)
@@ -140,7 +142,7 @@ app.put('/edit/Servicios',(req,res)=>{
               }
             })
             .then(resp => res.json('done'))
-            .catch(err => res.status(400).json(err))
+            .catch(err => res.send(err))
           })
         })
       })
@@ -164,7 +166,7 @@ app.put('/edit/Clientes',(req,res)=>{
       return trx('Servicio').where({CI:key})
       .update({CI: ci, Sexo:sexo})
       .then(resp => res.json('done'))
-      .catch(err => res.status(400).json(err))
+      .catch(err => res.send(err))
     })
     .then(trx.commit)
     .catch(trx.rollback)
@@ -176,6 +178,7 @@ app.put('/importe',(req,res)=>{
   knex('Servicio').where({IDServicio: key})
   .update({ImporteTotal: importe})
   .then(resp => res.json())
+  .catch(err => res.send(err))
 })
 
 app.listen(port) 
